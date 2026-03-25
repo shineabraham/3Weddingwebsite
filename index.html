@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olivia & James — Wedding Invitation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            champagne: '#D4A574',
+            'champagne-light': '#E8CDAF',
+            'champagne-dark': '#B8875A',
+            ivory: '#FAF7F2',
+            'ivory-warm': '#F5EDE3',
+            charcoal: '#2C2C2C',
+            'warm-gray': '#6B6360',
+            'soft-blush': '#E8D5CC',
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'serif'],
+            body: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #FAF7F2;
+      color: #2C2C2C;
+      overflow-x: hidden;
+    }
+
+    /* Typography */
+    .font-display { font-family: 'Cormorant Garamond', serif; }
+    .font-body { font-family: 'Montserrat', sans-serif; }
+    .tracking-elegant { letter-spacing: -0.03em; }
+    .tracking-wide-custom { letter-spacing: 0.25em; }
+
+    /* Parallax hero */
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://placehold.co/1200x1800/2C2C2C/2C2C2C');
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(44, 44, 44, 0.15) 0%,
+        rgba(44, 44, 44, 0.3) 50%,
+        rgba(44, 44, 44, 0.7) 100%
+      );
+    }
+
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      mix-blend-mode: multiply;
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+
+    /* Parallax image sections */
+    .parallax-bg {
+      position: absolute;
+      inset: -20% 0;
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    /* Decorative divider */
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .divider-ornament::before,
+    .divider-ornament::after {
+      content: '';
+      width: 60px;
+      height: 1px;
+      background: #D4A574;
+      opacity: 0.5;
+    }
+
+    /* Layered shadows */
+    .shadow-elevated {
+      box-shadow:
+        0 2px 4px rgba(212, 165, 116, 0.04),
+        0 8px 24px rgba(212, 165, 116, 0.08),
+        0 24px 48px rgba(44, 44, 44, 0.06);
+    }
+
+    .shadow-floating {
+      box-shadow:
+        0 4px 8px rgba(212, 165, 116, 0.06),
+        0 16px 40px rgba(212, 165, 116, 0.1),
+        0 32px 64px rgba(44, 44, 44, 0.08);
+    }
+
+    /* Interactive states */
+    .btn-rsvp {
+      position: relative;
+      overflow: hidden;
+      background: #D4A574;
+      color: #FAF7F2;
+      padding: 16px 48px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  opacity 0.3s ease;
+    }
+
+    .btn-rsvp::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-rsvp:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-rsvp:hover::before {
+      opacity: 1;
+    }
+
+    .btn-rsvp:focus-visible {
+      outline: 2px solid #D4A574;
+      outline-offset: 4px;
+    }
+
+    .btn-rsvp:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* Form styling */
+    .form-input {
+      width: 100%;
+      padding: 14px 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #2C2C2C;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #D4A57466;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-input:focus {
+      border-bottom-color: #D4A574;
+    }
+
+    .form-input::placeholder {
+      color: #6B636099;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 14px 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #2C2C2C;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #D4A57466;
+      outline: none;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23D4A574' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-select:focus {
+      border-bottom-color: #D4A574;
+    }
+
+    /* Gallery grid */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:focus-visible img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44, 44, 44, 0.3), transparent 50%);
+      pointer-events: none;
+    }
+
+    .gallery-item .color-wash {
+      position: absolute;
+      inset: 0;
+      background: #D4A574;
+      mix-blend-mode: multiply;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      animation: scrollBounce 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(10px); opacity: 1; }
+    }
+
+    /* Nav */
+    .nav-link {
+      position: relative;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #D4A574;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after {
+      width: 100%;
+    }
+
+    .nav-link:focus-visible {
+      outline: 1px solid #D4A57466;
+      outline-offset: 6px;
+    }
+
+    /* Section parallax images */
+    .section-parallax {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #2C2C2C;
+      color: #FAF7F2;
+      padding: 16px 32px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      border-radius: 2px;
+      z-index: 100;
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  opacity 0.4s ease;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Countdown */
+    .countdown-unit {
+      text-align: center;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(250, 247, 242, 0.98);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Timeline */
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: #D4A57433;
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+      .timeline-line {
+        left: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar" style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 20px 0; transition: background 0.4s ease, padding 0.4s ease;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center;">
+      <a href="#hero" class="font-display nav-link" style="font-size: 20px; color: #FAF7F2; text-decoration: none; font-weight: 300; letter-spacing: 0.1em;" id="nav-logo">O & J</a>
+
+      <!-- Desktop nav -->
+      <div style="display: none; gap: 32px;" class="desktop-nav" id="desktop-nav">
+        <a href="#story" class="nav-link font-body" style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; color: #FAF7F2; font-weight: 400;" id="nav-story">Our Story</a>
+        <a href="#schedule" class="nav-link font-body" style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; color: #FAF7F2; font-weight: 400;" id="nav-schedule">Schedule</a>
+        <a href="#gallery" class="nav-link font-body" style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; color: #FAF7F2; font-weight: 400;" id="nav-gallery">Gallery</a>
+        <a href="#rsvp" class="nav-link font-body" style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; color: #FAF7F2; font-weight: 400;" id="nav-rsvp">RSVP</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="menu-toggle" aria-label="Open menu" style="background: none; border: none; cursor: pointer; padding: 8px; display: block;" class="md-hidden">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FAF7F2" stroke-width="1.5" id="menu-icon">
+          <line x1="4" y1="7" x2="20" y2="7"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#story" class="font-display" style="font-size: 32px; color: #2C2C2C; text-decoration: none; font-weight: 300;" onclick="closeMobileMenu()">Our Story</a>
+    <a href="#schedule" class="font-display" style="font-size: 32px; color: #2C2C2C; text-decoration: none; font-weight: 300;" onclick="closeMobileMenu()">Schedule</a>
+    <a href="#gallery" class="font-display" style="font-size: 32px; color: #2C2C2C; text-decoration: none; font-weight: 300;" onclick="closeMobileMenu()">Gallery</a>
+    <a href="#rsvp" class="font-display" style="font-size: 32px; color: #2C2C2C; text-decoration: none; font-weight: 300;" onclick="closeMobileMenu()">RSVP</a>
+    <button onclick="closeMobileMenu()" style="position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; padding: 8px;" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="1.5">
+        <line x1="6" y1="6" x2="18" y2="18"/>
+        <line x1="18" y1="6" x2="6" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-grain"></div>
+
+    <div style="position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px;">
+      <p class="font-body" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: #E8CDAF; margin-bottom: 24px; opacity: 0; animation: fadeUp 1s 0.3s forwards;">Together with their families</p>
+
+      <h1 class="font-display tracking-elegant" style="font-size: clamp(48px, 12vw, 96px); color: #FAF7F2; font-weight: 300; line-height: 1; margin-bottom: 8px; opacity: 0; animation: fadeUp 1s 0.5s forwards;">
+        Olivia
+      </h1>
+      <div class="divider-ornament" style="margin: 12px 0; opacity: 0; animation: fadeUp 1s 0.65s forwards;">
+        <span class="font-display" style="font-size: 20px; color: #D4A574; font-style: italic;">&</span>
+      </div>
+      <h1 class="font-display tracking-elegant" style="font-size: clamp(48px, 12vw, 96px); color: #FAF7F2; font-weight: 300; line-height: 1; margin-bottom: 32px; opacity: 0; animation: fadeUp 1s 0.8s forwards;">
+        James
+      </h1>
+
+      <div style="opacity: 0; animation: fadeUp 1s 1s forwards;">
+        <div style="width: 40px; height: 1px; background: #D4A574; margin: 0 auto 20px;"></div>
+        <p class="font-body" style="font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: #E8CDAF; font-weight: 300;">September 14, 2026</p>
+        <p class="font-body" style="font-size: 11px; letter-spacing: 0.15em; color: #E8CDAF99; margin-top: 8px; font-weight: 300;">The Grand Estate, Napa Valley</p>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10; text-align: center;">
+      <svg width="20" height="30" viewBox="0 0 20 30" fill="none" stroke="#D4A574" stroke-width="1.2" style="opacity: 0.6;">
+        <rect x="1" y="1" width="18" height="28" rx="9"/>
+        <circle cx="10" cy="10" r="2" fill="#D4A574"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== COUNTDOWN ===== -->
+  <section style="background: #2C2C2C; padding: 64px 24px;">
+    <div class="reveal" style="max-width: 600px; margin: 0 auto; text-align: center;">
+      <p class="font-body" style="font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #D4A574; margin-bottom: 32px;">Counting Down To Forever</p>
+      <div id="countdown" style="display: flex; justify-content: center; gap: 40px;">
+        <div class="countdown-unit">
+          <span class="font-display" style="font-size: clamp(36px, 8vw, 56px); color: #FAF7F2; font-weight: 300; line-height: 1;" id="cd-days">000</span>
+          <p class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; margin-top: 8px;">Days</p>
+        </div>
+        <div class="countdown-unit">
+          <span class="font-display" style="font-size: clamp(36px, 8vw, 56px); color: #FAF7F2; font-weight: 300; line-height: 1;" id="cd-hours">00</span>
+          <p class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; margin-top: 8px;">Hours</p>
+        </div>
+        <div class="countdown-unit">
+          <span class="font-display" style="font-size: clamp(36px, 8vw, 56px); color: #FAF7F2; font-weight: 300; line-height: 1;" id="cd-mins">00</span>
+          <p class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; margin-top: 8px;">Minutes</p>
+        </div>
+        <div class="countdown-unit">
+          <span class="font-display" style="font-size: clamp(36px, 8vw, 56px); color: #FAF7F2; font-weight: 300; line-height: 1;" id="cd-secs">00</span>
+          <p class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; margin-top: 8px;">Seconds</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OUR STORY ===== -->
+  <section id="story" style="padding: 120px 24px; background: #FAF7F2; position: relative;">
+    <div class="hero-grain" style="opacity: 0.02;"></div>
+    <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
+      <div class="reveal" style="text-align: center; margin-bottom: 64px;">
+        <p class="font-body" style="font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #D4A574; margin-bottom: 16px;">How It All Began</p>
+        <h2 class="font-display tracking-elegant" style="font-size: clamp(36px, 8vw, 56px); font-weight: 300; color: #2C2C2C;">Our Story</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 64px;">
+        <!-- Story card 1 -->
+        <div class="reveal-left stagger-1" style="display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center;" id="story-grid-1">
+          <div class="gallery-item" style="aspect-ratio: 4/3;">
+            <img src="https://placehold.co/600x450/D4A574/FAF7F2?text=First+Meeting" alt="Our first meeting">
+            <div class="color-wash"></div>
+          </div>
+          <div>
+            <p class="font-body" style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #D4A574; margin-bottom: 12px;">June 2019</p>
+            <h3 class="font-display" style="font-size: 28px; font-weight: 400; margin-bottom: 16px; color: #2C2C2C;">The First Glance</h3>
+            <p class="font-body" style="font-size: 14px; line-height: 1.7; color: #6B6360; font-weight: 300;">What started as a chance encounter at a friend's gallery opening turned into hours of conversation that felt like minutes. We discovered a shared love for old films, Sunday farmers markets, and the quiet magic of golden hour.</p>
+          </div>
+        </div>
+
+        <!-- Story card 2 -->
+        <div class="reveal-right stagger-2" style="display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center;" id="story-grid-2">
+          <div class="gallery-item" style="aspect-ratio: 4/3;">
+            <img src="https://placehold.co/600x450/B8875A/FAF7F2?text=The+Journey" alt="Our journey together">
+            <div class="color-wash"></div>
+          </div>
+          <div>
+            <p class="font-body" style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #D4A574; margin-bottom: 12px;">2019 — 2025</p>
+            <h3 class="font-display" style="font-size: 28px; font-weight: 400; margin-bottom: 16px; color: #2C2C2C;">Growing Together</h3>
+            <p class="font-body" style="font-size: 14px; line-height: 1.7; color: #6B6360; font-weight: 300;">Through cross-country moves, midnight cooking experiments, and a rescue dog named Eloise, every chapter has been richer because we've written it together. Our adventure has taken us from city rooftops to quiet coastlines.</p>
+          </div>
+        </div>
+
+        <!-- Story card 3 -->
+        <div class="reveal-left stagger-3" style="display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center;" id="story-grid-3">
+          <div class="gallery-item" style="aspect-ratio: 4/3;">
+            <img src="https://placehold.co/600x450/E8CDAF/2C2C2C?text=The+Proposal" alt="The proposal">
+            <div class="color-wash"></div>
+          </div>
+          <div>
+            <p class="font-body" style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #D4A574; margin-bottom: 12px;">December 2025</p>
+            <h3 class="font-display" style="font-size: 28px; font-weight: 400; margin-bottom: 16px; color: #2C2C2C;">The Question</h3>
+            <p class="font-body" style="font-size: 14px; line-height: 1.7; color: #6B6360; font-weight: 300;">On a snowy evening in the garden where we had our first date, under a canopy of string lights and falling snow, James got down on one knee. She said yes before he even finished asking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARALLAX DIVIDER ===== -->
+  <section class="section-parallax" style="height: 50vh; position: relative;">
+    <div class="parallax-bg" id="parallax-divider-1" style="background-image: url('https://placehold.co/1400x800/2C2C2C/2C2C2C');"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(44,44,44,0.4), rgba(44,44,44,0.6));"></div>
+    <div class="hero-grain"></div>
+    <div style="position: relative; z-index: 2; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 24px;">
+      <div class="reveal">
+        <p class="font-display" style="font-size: clamp(24px, 5vw, 40px); color: #FAF7F2; font-weight: 300; font-style: italic; line-height: 1.5; max-width: 600px;">
+          "Whatever our souls are made of, his and mine are the same."
+        </p>
+        <p class="font-body" style="font-size: 12px; letter-spacing: 0.15em; color: #D4A574; margin-top: 24px; font-weight: 300;">— Emily Brontë</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCHEDULE ===== -->
+  <section id="schedule" style="padding: 120px 24px; background: #F5EDE3; position: relative;">
+    <div class="hero-grain" style="opacity: 0.02;"></div>
+    <div style="max-width: 700px; margin: 0 auto; position: relative; z-index: 2;">
+      <div class="reveal" style="text-align: center; margin-bottom: 80px;">
+        <p class="font-body" style="font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #D4A574; margin-bottom: 16px;">September 14, 2026</p>
+        <h2 class="font-display tracking-elegant" style="font-size: clamp(36px, 8vw, 56px); font-weight: 300; color: #2C2C2C;">Schedule of Events</h2>
+      </div>
+
+      <div style="position: relative;">
+        <div class="timeline-line"></div>
+
+        <!-- Event 1 -->
+        <div class="reveal stagger-1" style="display: flex; gap: 32px; align-items: flex-start; margin-bottom: 64px; position: relative;">
+          <div style="flex: 1; text-align: right; padding-right: 32px;" class="timeline-content-left">
+            <p class="font-display" style="font-size: 36px; font-weight: 300; color: #D4A574; line-height: 1;">3:00</p>
+            <p class="font-body" style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #6B6360; margin-top: 4px;">in the afternoon</p>
+          </div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; border: 2px solid #D4A574; background: #F5EDE3; flex-shrink: 0; margin-top: 8px; position: relative; z-index: 2;"></div>
+          <div style="flex: 1; padding-left: 32px;" class="timeline-content-right">
+            <h3 class="font-display" style="font-size: 24px; font-weight: 400; color: #2C2C2C; margin-bottom: 8px;">The Ceremony</h3>
+            <p class="font-body" style="font-size: 13px; line-height: 1.7; color: #6B6360; font-weight: 300;">Garden Pavilion at The Grand Estate. Please be seated by 2:45 PM.</p>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="reveal stagger-2" style="display: flex; gap: 32px; align-items: flex-start; margin-bottom: 64px; position: relative;">
+          <div style="flex: 1; text-align: right; padding-right: 32px;" class="timeline-content-left">
+            <p class="font-display" style="font-size: 36px; font-weight: 300; color: #D4A574; line-height: 1;">4:00</p>
+            <p class="font-body" style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #6B6360; margin-top: 4px;">in the afternoon</p>
+          </div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; border: 2px solid #D4A574; background: #F5EDE3; flex-shrink: 0; margin-top: 8px; position: relative; z-index: 2;"></div>
+          <div style="flex: 1; padding-left: 32px;" class="timeline-content-right">
+            <h3 class="font-display" style="font-size: 24px; font-weight: 400; color: #2C2C2C; margin-bottom: 8px;">Cocktail Hour</h3>
+            <p class="font-body" style="font-size: 13px; line-height: 1.7; color: #6B6360; font-weight: 300;">Join us on the terrace for artisan cocktails, canapés, and live jazz under the oak trees.</p>
+          </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="reveal stagger-3" style="display: flex; gap: 32px; align-items: flex-start; margin-bottom: 64px; position: relative;">
+          <div style="flex: 1; text-align: right; padding-right: 32px;" class="timeline-content-left">
+            <p class="font-display" style="font-size: 36px; font-weight: 300; color: #D4A574; line-height: 1;">6:00</p>
+            <p class="font-body" style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #6B6360; margin-top: 4px;">in the evening</p>
+          </div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; border: 2px solid #D4A574; background: #F5EDE3; flex-shrink: 0; margin-top: 8px; position: relative; z-index: 2;"></div>
+          <div style="flex: 1; padding-left: 32px;" class="timeline-content-right">
+            <h3 class="font-display" style="font-size: 24px; font-weight: 400; color: #2C2C2C; margin-bottom: 8px;">Reception & Dinner</h3>
+            <p class="font-body" style="font-size: 13px; line-height: 1.7; color: #6B6360; font-weight: 300;">A farm-to-table dinner in the vineyard barn, followed by toasts, laughter, and the first dance.</p>
+          </div>
+        </div>
+
+        <!-- Event 4 -->
+        <div class="reveal stagger-4" style="display: flex; gap: 32px; align-items: flex-start; position: relative;">
+          <div style="flex: 1; text-align: right; padding-right: 32px;" class="timeline-content-left">
+            <p class="font-display" style="font-size: 36px; font-weight: 300; color: #D4A574; line-height: 1;">9:00</p>
+            <p class="font-body" style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #6B6360; margin-top: 4px;">in the evening</p>
+          </div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; border: 2px solid #D4A574; background: #F5EDE3; flex-shrink: 0; margin-top: 8px; position: relative; z-index: 2;"></div>
+          <div style="flex: 1; padding-left: 32px;" class="timeline-content-right">
+            <h3 class="font-display" style="font-size: 24px; font-weight: 400; color: #2C2C2C; margin-bottom: 8px;">Dancing Under the Stars</h3>
+            <p class="font-body" style="font-size: 13px; line-height: 1.7; color: #6B6360; font-weight: 300;">The dance floor opens beneath string lights and a starlit sky. Dance the night away.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="gallery" style="padding: 120px 24px; background: #FAF7F2; position: relative;">
+    <div class="hero-grain" style="opacity: 0.02;"></div>
+    <div style="max-width: 1000px; margin: 0 auto; position: relative; z-index: 2;">
+      <div class="reveal" style="text-align: center; margin-bottom: 64px;">
+        <p class="font-body" style="font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #D4A574; margin-bottom: 16px;">Moments We Treasure</p>
+        <h2 class="font-display tracking-elegant" style="font-size: clamp(36px, 8vw, 56px); font-weight: 300; color: #2C2C2C;">Photo Gallery</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;" id="gallery-grid">
+        <div class="gallery-item reveal-scale stagger-1" style="aspect-ratio: 1; grid-row: span 2;" tabindex="0">
+          <img src="https://placehold.co/600x600/D4A574/FAF7F2?text=Together" alt="Couple portrait" loading="lazy">
+          <div class="color-wash"></div>
+        </div>
+        <div class="gallery-item reveal-scale stagger-2" style="aspect-ratio: 1;" tabindex="0">
+          <img src="https://placehold.co/400x400/B8875A/FAF7F2?text=Laughing" alt="Candid moment" loading="lazy">
+          <div class="color-wash"></div>
+        </div>
+        <div class="gallery-item reveal-scale stagger-3" style="aspect-ratio: 1;" tabindex="0">
+          <img src="https://placehold.co/400x400/E8CDAF/2C2C2C?text=Sunset" alt="At sunset" loading="lazy">
+          <div class="color-wash"></div>
+        </div>
+        <div class="gallery-item reveal-scale stagger-4" style="aspect-ratio: 1;" tabindex="0">
+          <img src="https://placehold.co/400x400/6B6360/FAF7F2?text=Adventure" alt="Adventure together" loading="lazy">
+          <div class="color-wash"></div>
+        </div>
+        <div class="gallery-item reveal-scale stagger-5" style="aspect-ratio: 1;" tabindex="0">
+          <img src="https://placehold.co/400x400/2C2C2C/D4A574?text=Embrace" alt="Embracing" loading="lazy">
+          <div class="color-wash"></div>
+        </div>
+        <div class="gallery-item reveal-scale stagger-3" style="aspect-ratio: 2/1; grid-column: span 2;" tabindex="0">
+          <img src="https://placehold.co/800x400/D4A574/FAF7F2?text=Walking+Together" alt="Walking hand in hand" loading="lazy">
+          <div class="color-wash"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARALLAX DIVIDER 2 ===== -->
+  <section class="section-parallax" style="height: 40vh; position: relative;">
+    <div class="parallax-bg" id="parallax-divider-2" style="background-image: url('https://placehold.co/1400x800/B8875A/B8875A');"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(44,44,44,0.5), rgba(44,44,44,0.7));"></div>
+    <div class="hero-grain"></div>
+    <div style="position: relative; z-index: 2; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 24px;">
+      <div class="reveal">
+        <p class="font-body" style="font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #D4A574; margin-bottom: 16px;">We can't wait to celebrate with you</p>
+        <p class="font-display" style="font-size: clamp(28px, 6vw, 48px); color: #FAF7F2; font-weight: 300; font-style: italic;">Please join us</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RSVP ===== -->
+  <section id="rsvp" style="padding: 120px 24px; background: #2C2C2C; position: relative;">
+    <div class="hero-grain" style="opacity: 0.03;"></div>
+    <div style="max-width: 520px; margin: 0 auto; position: relative; z-index: 2;">
+      <div class="reveal" style="text-align: center; margin-bottom: 64px;">
+        <p class="font-body" style="font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #D4A574; margin-bottom: 16px;">Kindly Respond</p>
+        <h2 class="font-display tracking-elegant" style="font-size: clamp(36px, 8vw, 56px); font-weight: 300; color: #FAF7F2;">RSVP</h2>
+        <p class="font-body" style="font-size: 13px; color: #6B6360; margin-top: 16px; line-height: 1.7; font-weight: 300;">Please respond by August 1, 2026</p>
+      </div>
+
+      <form id="rsvp-form" class="reveal stagger-2" style="display: flex; flex-direction: column; gap: 32px;">
+        <div>
+          <label class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; display: block; margin-bottom: 4px;">Full Name</label>
+          <input type="text" name="name" class="form-input" placeholder="Your full name" required style="color: #FAF7F2;">
+        </div>
+
+        <div>
+          <label class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; display: block; margin-bottom: 4px;">Email</label>
+          <input type="email" name="email" class="form-input" placeholder="your@email.com" required style="color: #FAF7F2;">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div>
+            <label class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; display: block; margin-bottom: 4px;">Attending</label>
+            <select name="attending" class="form-select" required style="color: #FAF7F2;">
+              <option value="" disabled selected style="color: #6B636099;">Will you attend?</option>
+              <option value="yes" style="color: #2C2C2C;">Joyfully Accept</option>
+              <option value="no" style="color: #2C2C2C;">Regretfully Decline</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; display: block; margin-bottom: 4px;">Number of Guests</label>
+            <select name="guests" class="form-select" required style="color: #FAF7F2;">
+              <option value="" disabled selected style="color: #6B636099;">Guests</option>
+              <option value="1" style="color: #2C2C2C;">1</option>
+              <option value="2" style="color: #2C2C2C;">2</option>
+              <option value="3" style="color: #2C2C2C;">3</option>
+              <option value="4" style="color: #2C2C2C;">4</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; display: block; margin-bottom: 4px;">Meal Preference</label>
+          <select name="meal" class="form-select" required style="color: #FAF7F2;">
+            <option value="" disabled selected style="color: #6B636099;">Select your entrée</option>
+            <option value="beef" style="color: #2C2C2C;">Herb-Crusted Filet Mignon</option>
+            <option value="salmon" style="color: #2C2C2C;">Pan-Seared Wild Salmon</option>
+            <option value="vegetarian" style="color: #2C2C2C;">Wild Mushroom Risotto (V)</option>
+            <option value="vegan" style="color: #2C2C2C;">Garden Harvest Plate (VG)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="font-body" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6360; display: block; margin-bottom: 4px;">Dietary Restrictions or Notes</label>
+          <input type="text" name="notes" class="form-input" placeholder="Any allergies or special requests" style="color: #FAF7F2;">
+        </div>
+
+        <div style="text-align: center; margin-top: 16px;">
+          <button type="submit" class="btn-rsvp">Send RSVP</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background: #2C2C2C; border-top: 1px solid #D4A57420; padding: 64px 24px; text-align: center;">
+    <div class="reveal">
+      <p class="font-display" style="font-size: clamp(28px, 6vw, 40px); color: #FAF7F2; font-weight: 300; margin-bottom: 16px;">Olivia & James</p>
+      <div class="divider-ornament" style="margin-bottom: 16px;">
+        <span class="font-display" style="font-size: 16px; color: #D4A574; font-style: italic;">September 14, 2026</span>
+      </div>
+      <p class="font-body" style="font-size: 11px; letter-spacing: 0.15em; color: #6B6360; font-weight: 300;">The Grand Estate, Napa Valley, California</p>
+      <p class="font-body" style="font-size: 10px; color: #6B636066; margin-top: 32px; font-weight: 300;">Made with love</p>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">Thank you! Your RSVP has been received.</div>
+
+  <style>
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive desktop layouts */
+    @media (min-width: 768px) {
+      #desktop-nav { display: flex !important; }
+      #menu-toggle { display: none !important; }
+
+      #story-grid-1,
+      #story-grid-3 {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      #story-grid-2 {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      #story-grid-2 .gallery-item {
+        order: 2;
+      }
+
+      #gallery-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 12px !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .timeline-content-left {
+        display: none;
+      }
+      .timeline-content-right {
+        padding-left: 16px !important;
+      }
+      #schedule [style*="display: flex; gap: 32px"] {
+        padding-left: 24px;
+      }
+    }
+  </style>
+
+  <script>
+    // ===== Scroll Reveal =====
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ===== Parallax =====
+    const heroBg = document.getElementById('hero-bg');
+    const parallaxDivider1 = document.getElementById('parallax-divider-1');
+    const parallaxDivider2 = document.getElementById('parallax-divider-2');
+
+    let ticking = false;
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+
+      // Hero parallax
+      if (heroBg) {
+        heroBg.style.transform = `translateY(${scrollY * 0.35}px)`;
+      }
+
+      // Section parallax dividers
+      [parallaxDivider1, parallaxDivider2].forEach(el => {
+        if (!el) return;
+        const rect = el.parentElement.getBoundingClientRect();
+        const visible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (visible) {
+          const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+          el.style.transform = `translateY(${(progress - 0.5) * -80}px)`;
+        }
+      });
+
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // ===== Navbar scroll effect =====
+    const navbar = document.getElementById('navbar');
+    const navLogo = document.getElementById('nav-logo');
+    const navLinks = document.querySelectorAll('#desktop-nav a, #menu-icon');
+
+    function updateNavbar() {
+      const scrolled = window.scrollY > 100;
+      if (scrolled) {
+        navbar.style.background = 'rgba(44, 44, 44, 0.95)';
+        navbar.style.backdropFilter = 'blur(10px)';
+        navbar.style.padding = '12px 0';
+      } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.padding = '20px 0';
+      }
+    }
+
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+
+    // ===== Mobile menu =====
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+    }
+
+    // ===== Countdown =====
+    const weddingDate = new Date('2026-09-14T15:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = weddingDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '0';
+        document.getElementById('cd-hours').textContent = '0';
+        document.getElementById('cd-mins').textContent = '0';
+        document.getElementById('cd-secs').textContent = '0';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').textContent = days;
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ===== RSVP Form =====
+    const rsvpForm = document.getElementById('rsvp-form');
+    const toast = document.getElementById('toast');
+
+    rsvpForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(rsvpForm);
+      const data = Object.fromEntries(formData);
+      console.log('RSVP submitted:', data);
+
+      // Show toast
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+
+      rsvpForm.reset();
+    });
+
+    // ===== Smooth scroll for nav links =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
